@@ -11,8 +11,8 @@ export default class App extends Component {
         return(
             <Router>
                 <Stack key="root">
-                    <Scene key="houses" component={Houses} title="Houses" />
-                    <Scene key="characters" component={Characters} title="Characters" initial={true}/>
+                    <Scene key="houses" component={Houses} title="Houses" initial={true}/>
+                    <Scene key="characters" component={Characters} title="Characters" />
                 </Stack>
             </Router>
 
