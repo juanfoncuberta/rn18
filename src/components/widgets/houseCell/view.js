@@ -11,6 +11,7 @@ export default class HouseCell extends Component{
     }
     render(){
         const { house, selected, onHousePress, selectedBackgroundColour} = this.props
+        var image = house.image_dir ? { uri: house.image_dir } : require('../../../resources/placeholder_house.jpg')
        
         return(
             <TouchableOpacity 
@@ -19,7 +20,7 @@ export default class HouseCell extends Component{
                 activeOpacity = {0.4}
             >
                 <Image 
-                    source = {{ uri: house.image_dir }}
+                    source = {image}
                     style={ styles.houseImageOnCell }
                     resizeMode = {'cover'}
                 />
