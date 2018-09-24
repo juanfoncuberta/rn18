@@ -3,6 +3,7 @@ import { View,Text, FlatList, TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import  styles from './styles'
 import * as api from '../../../api/'
+import { HouseCell } from '../../widgets'
 
 
 export default class Houses extends Component{
@@ -45,7 +46,6 @@ export default class Houses extends Component{
                     onHousePress={(value)=> this._onHouseTapped(value)}   
                     selected={this.state.selected}
                     selectedBackgroundColour={'lime'}
-                    backgroundColor = {'white'}
                 />
     }
     render(){
@@ -55,35 +55,9 @@ export default class Houses extends Component{
                     data={this.state.houseslist} 
                     renderItem={ value => this._renderItem(value)}
                     keyExtractor={(item,id) => 'cell' + id}
-                    extraData = {this.state}
+                    extraData = {this.state.selected}
                 />
             </View>
-        )
-    }
-
-}
-
-class HouseCell extends Component{
-
-    static defaultProps = {
-        house: null,
-        onHousePress:() => {},
-        selected: null,
-        selectedBackgroundColour: 'red',
-        backgroundColor: 'white'
-    }
-    render(){
-        const { house, selected, onHousePress, selectedBackgroundColour} = this.props
-        const name = house ? house.nombre : 'House without name'
-        const isSelected = selected && selected.id == house.id ? true : false
-        const backgroundColor = isSelected ? {backgroundColor: selectedBackgroundColour} : {backgroundColor: this.props.backgroundColor}
-        return(
-            <TouchableOpacity 
-                style={[styles.cellView, backgroundColor]} 
-                onPress={ () => onHousePress(house)}
-            >
-                <Text>{ name }</Text>
-            </TouchableOpacity>
         )
     }
 
