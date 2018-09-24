@@ -1,16 +1,24 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
+
+
+const {height, width} = Dimensions.get('window')
+
 
 export default StyleSheet.create({
-    container: {
-        flex: 1, 
- 
-    },
-    cellView: {
-        height:120,
-        borderWidth:1,
-        borderColor: 'blue', 
-        alignItems: 'center',
+    cellContainer: {
+        width: width/2,
+        borderWidth: 1, 
+        height: height/2 -10,
+        backgroundColor: 'rgb(24,24,24)',
+        alignItems: 'center', 
+        paddingHorizontal: 4,
         justifyContent: 'center',
-        backgroundColor: 'white'
+        paddingVertical: 2,
+        borderColor: 'grey',
+        borderWidth: 1
+    },
+    houseImageOnCell:{
+        width: '100%',
+        height:'100%'
     }
 })

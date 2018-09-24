@@ -50,12 +50,14 @@ export default class Houses extends Component{
     }
     render(){
         return(
-            <View style={styles.container}>
+            <View style={styles.cellContainer}>
                 <FlatList 
                     data={this.state.houseslist} 
                     renderItem={ value => this._renderItem(value)}
                     keyExtractor={(item,id) => 'cell' + id}
                     extraData = {this.state.selected}
+                    numColumns = { 2 }
+                    style = {styles.flatList}
                 />
             </View>
         )

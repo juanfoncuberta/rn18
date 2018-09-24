@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import { TouchableOpacity, Text } from 'react-native'
+import { TouchableOpacity, Image } from 'react-native'
 import  styles from './styles'
 
 export default class HouseCell extends Component{
@@ -7,20 +7,23 @@ export default class HouseCell extends Component{
     static defaultProps = {
         house: null,
         onHousePress:() => {},
-        selected: null,
-        selectedBackgroundColour: 'red'
+
     }
     render(){
         const { house, selected, onHousePress, selectedBackgroundColour} = this.props
-        const name = house ? house.nombre : 'House without name'
-        const isSelected = selected && selected.id == house.id ? true : false
-        const backgroundColor = isSelected ? {backgroundColor: selectedBackgroundColour} : {backgroundColor: styles.cellView.backgroundColor}
+       
         return(
             <TouchableOpacity 
-                style={[styles.cellView, backgroundColor]} 
+                style={styles.cellContainer} 
                 onPress={ () => onHousePress(house)}
+                activeOpacity = {0.4}
             >
-                <Text>{ name }</Text>
+                <Image 
+                    source = {{ uri: house.image_dir }}
+                    style={ styles.houseImageOnCell }
+                    resizeMode = {'cover'}
+                />
+             
             </TouchableOpacity>
         )
     }
