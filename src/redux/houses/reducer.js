@@ -25,6 +25,7 @@ export default function reducer(state = initialState, action = {}){
                 ...state,
                 item: action.value
             }
-        default: state;
+        default: 
+            return state;
     }
 }
