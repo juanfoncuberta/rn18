@@ -32,11 +32,13 @@ class Houses extends Component{
 
     _renderActivityIndicator() {
         return (
-            <View style={{padding:20}}>
+            <View style={{alignItems: 'center', justifyContent: 'center', position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}>
                 <ActivityIndicator size={'large'} color={"white"}  animating={this.props.isFetching}/>
             </View>
         )
     }
+
+ 
     render(){
         return(
             <View style={styles.cellContainer}>
@@ -47,9 +49,8 @@ class Houses extends Component{
                     extraData = {this.state}
                     numColumns = { 2 }
                     style = {styles.flatList}
-                    ListFooterComponent={ this._renderActivityIndicator }
                 />
-                
+                { this._renderActivityIndicator() }
             </View>
         )
     }

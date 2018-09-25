@@ -9,4 +9,6 @@ export default StyleSheet.create({
     flatList: {
         paddingTop: 20
     }
+  
+
 })
