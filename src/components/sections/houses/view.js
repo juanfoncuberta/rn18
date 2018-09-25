@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View,Text, FlatList, TouchableOpacity } from 'react-native'
+import { View, FlatList, ActivityIndicator } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import  styles from './styles'
 import { HouseCell } from '../../widgets'
@@ -11,10 +11,10 @@ class Houses extends Component{
 
     constructor(props){
         super(props)
-        this.state = {
-            houseslist: []
-        }
+        //Binding the activity indicator to this context
+        this._renderActivityIndicator = this._renderActivityIndicator.bind(this)
     }
+    
 
     componentDidMount(){
        this.props.fetchHousesList()
@@ -29,6 +29,14 @@ class Houses extends Component{
                     onHousePress={(value)=> this._onHouseTapped(value)}   
                 />
     }
+
+    _renderActivityIndicator() {
+        return (
+            <View style={{padding:20}}>
+                <ActivityIndicator size={'large'} color={"white"}  animating={this.props.isFetching}/>
+            </View>
+        )
+    }
     render(){
         return(
             <View style={styles.cellContainer}>
@@ -39,7 +47,9 @@ class Houses extends Component{
                     extraData = {this.state}
                     numColumns = { 2 }
                     style = {styles.flatList}
+                    ListFooterComponent={ this._renderActivityIndicator }
                 />
+                
             </View>
         )
     }
