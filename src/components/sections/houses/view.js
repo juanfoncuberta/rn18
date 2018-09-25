@@ -21,7 +21,7 @@ class Houses extends Component{
     }
   
     _onHouseTapped(house){
-        
+        this.props.onHouseTapped(house)
     }
     _renderItem({ item }){
         return <HouseCell 
@@ -31,6 +31,9 @@ class Houses extends Component{
     }
 
     _renderActivityIndicator() {
+        if(!this.props.isFetching) {
+            return null
+        }
         return (
             <View style={{alignItems: 'center', justifyContent: 'center', position: 'absolute', top: 0, left: 0, bottom: 0, right: 0}}>
                 <ActivityIndicator size={'large'} color={"white"}  animating={this.props.isFetching}/>
@@ -46,7 +49,7 @@ class Houses extends Component{
                     data={this.props.list} 
                     renderItem={ value => this._renderItem(value)}
                     keyExtractor={(item,id) => 'cell' + id}
-                    extraData = {this.state}
+                    extraData = {this.props}
                     numColumns = { 2 }
                     style = {styles.flatList}
                 />
@@ -68,6 +71,10 @@ const mapDispatchToProps = (dispatch,props) => {
     return {
         fetchHousesList: () => {
             dispatch(HousesActions.fetchHousesList())        
+        },
+        onHouseTapped: (house) => {
+            dispatch(HousesActions.setItem(house))
+            Actions.characters()
         }
     }
 }
