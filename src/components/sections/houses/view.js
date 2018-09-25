@@ -44,8 +44,6 @@ export default class Houses extends Component{
         return <HouseCell 
                     house={item}
                     onHousePress={(value)=> this._onHouseTapped(value)}   
-                    selected={this.state.selected}
-                    selectedBackgroundColour={'lime'}
                 />
     }
     render(){

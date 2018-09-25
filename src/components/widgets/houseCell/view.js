@@ -10,7 +10,7 @@ export default class HouseCell extends Component{
 
     }
     render(){
-        const { house, selected, onHousePress, selectedBackgroundColour} = this.props
+        const { house, onHousePress} = this.props
         var image = house.image_dir ? { uri: house.image_dir } : require('../../../resources/placeholder_house.jpg')
        
         return(
