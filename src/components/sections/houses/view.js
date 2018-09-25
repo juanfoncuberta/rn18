@@ -2,43 +2,26 @@ import React, { Component } from 'react'
 import { View,Text, FlatList, TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import  styles from './styles'
-import * as api from '../../../api/'
 import { HouseCell } from '../../widgets'
+import { connect } from 'react-redux'
+import * as HousesActions from '../../../redux/houses/actions'
 
 
-export default class Houses extends Component{
+class Houses extends Component{
 
     constructor(props){
         super(props)
         this.state = {
-            houseslist: [],
-            selected: null
+            houseslist: []
         }
     }
 
     componentDidMount(){
-       this._fecthHouseslist()
-    }
-
-    _fecthHouseslist(){
-        api.fecthHouses().then(
-            response => {
-                if(response && response.data && response.data.records)
-                    this.setState( {houseslist: response.data.records} )
-            }
-        ).catch( error => {
-            this.setState({
-                houseslist: []
-            })
-        }
-
-        )
+       this.props.fetchHousesList()
     }
   
     _onHouseTapped(house){
-        this.setState({
-            selected: house
-        })
+        
     }
     _renderItem({ item }){
         return <HouseCell 
@@ -50,10 +33,10 @@ export default class Houses extends Component{
         return(
             <View style={styles.cellContainer}>
                 <FlatList 
-                    data={this.state.houseslist} 
+                    data={this.props.list} 
                     renderItem={ value => this._renderItem(value)}
                     keyExtractor={(item,id) => 'cell' + id}
-                    extraData = {this.state.selected}
+                    extraData = {this.state}
                     numColumns = { 2 }
                     style = {styles.flatList}
                 />
@@ -62,3 +45,19 @@ export default class Houses extends Component{
     }
 
 }
+
+const mapStateToProps = (state) => {
+    return {
+        isFetching: state.houses.isFetching,
+        list: state.houses.list
+    }
+}
+
+const mapDispatchToProps = (dispatch,props) => {
+    return {
+        fetchHousesList: () => {
+            dispatch(HousesActions.fetchHousesList())        
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Houses)
