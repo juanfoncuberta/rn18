@@ -74,7 +74,7 @@ const mapDispatchToProps = (dispatch,props) => {
         },
         onHouseTapped: (house) => {
             dispatch(HousesActions.setItem(house))
-            Actions.characters()
+            Actions.characters({title: house.nombre})
         }
     }
 }

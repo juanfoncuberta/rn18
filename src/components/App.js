@@ -26,7 +26,13 @@ export default class App extends Component {
                 <Router>
                     <Stack key="root">
                         <Scene key="houses" component={Houses} initial={true} hideNavBar={true}/>
-                        <Scene key="characters" component={Characters} title="Characters" />
+                        <Scene key="characters" 
+                                component={Characters} 
+                                navigationBarStyle={{ backgroundColor: 'black'}}
+                                backButtonTintColor = {'white'}
+                                backButtonTextStyle= {{color: 'white'}}
+                                titleStyle= {{color: 'white'}}
+                         />
                     </Stack>
                 </Router>
             </Provider>
