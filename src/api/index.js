@@ -14,3 +14,8 @@ export function fecthHouses(){
     return axios.get(url)
 
 }
+
+export function fetchHouseCharacters(houseId){
+    const url = `/personajes?casa=${houseId}`
+    return axios.get(url)
+}

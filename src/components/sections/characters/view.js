@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import styles from './styles'
 import { connect } from 'react-redux'
+import * as CharactersActions from '../../../redux/characters/actions'
 
 class Characters extends Component {
 
@@ -23,12 +24,13 @@ const mapStateToProps  = (state) => {
     }
 }
 
-function mapDispatachTopProps(dispatch, props){
+const mapDispatchTopProps = (dispatch, props) => {
+   
     return {
         fetchHouseCharacters: () => {
-   
+            dispatch(CharactersActions.fetchHouseCharacters())
         }
     }
 }
 
-export default connect(mapStateToProps,mapDispatachTopProps)(Characters)
+export default connect(mapStateToProps,mapDispatchTopProps)(Characters)

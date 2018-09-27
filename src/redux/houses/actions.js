@@ -1,5 +1,5 @@
 import * as types from './types'
-import * as api from '../../api'
+
 
 function setFetching(value){
     return {
@@ -23,7 +23,7 @@ export function setItem(value){
 }
 
 export function fetchHousesList(){
-    return (dispatch,getState) => {
+    return (dispatch, getState, api) => {
         dispatch(setFetching(true))
         api
             .fecthHouses()

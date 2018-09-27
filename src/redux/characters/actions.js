@@ -28,8 +28,24 @@ export function setItem(value){
 
 
 export function fetchHouseCharacters(){
-    return  (dispatch,getState) => {
-        const house = getState().house.item
-        console.log("fetchHouseCharacters house: ", house)
+    return  ( dispatch, getState, api) => {
+        const house = getState().house
+
+        if(!house) return
+
+        dispatch(setFetching(true))
+        api
+            .fetchHouseCharacters(houseId)
+            .then( 
+                res => {
+                    dispatch(setFetching(false))
+                    dispatch(setList(res.data.records))
+            })
+            .catch( 
+                err => {
+                    dispatch(setFetching(false))
+                   console.log("Error fetching houseCharacters: ", err);
+            })
+
     }
 }
