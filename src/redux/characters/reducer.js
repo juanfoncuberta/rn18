@@ -25,6 +25,6 @@ export default function reducer( state = initialState, action = {} ){
                 list: action.value
             }
         default:
-            return action.value
+            return state
     }
 } 

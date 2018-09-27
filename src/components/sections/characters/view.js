@@ -19,7 +19,7 @@ class Characters extends Component {
 
 const mapStateToProps  = (state) => {
     return {
-        isFetching: state.characters.isFetching
+       
     }
 }
 
