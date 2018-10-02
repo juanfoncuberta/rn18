@@ -1,5 +1,4 @@
 import * as types from './types'
-import {setItem} from '../houses/actions';
 
 
 
@@ -29,13 +28,12 @@ export function setItem(value){
 
 export function fetchHouseCharacters(){
     return  ( dispatch, getState, api) => {
-        const house = getState().house
-
+        const house = getState().houses.item
         if(!house) return
 
         dispatch(setFetching(true))
         api
-            .fetchHouseCharacters(houseId)
+            .fetchHouseCharacters(house.id)
             .then( 
                 res => {
                     dispatch(setFetching(false))
