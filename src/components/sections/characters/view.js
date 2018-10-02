@@ -12,7 +12,7 @@ class Characters extends Component {
     }
 
     _renderItem( item, index){
-        return <CharacterCell character={item} />
+        return <CharacterCell character={item} onCharacterPress={this.props.onCharacterTapped} />
 
     }
     
@@ -42,6 +42,9 @@ const mapDispatchTopProps = (dispatch, props) => {
     return {
         fetchHouseCharacters: () => {
             dispatch(CharactersActions.fetchHouseCharacters())
+        },
+        onCharacterTapped: (character) => {
+            dispatch(CharactersActions.setItem(character))
         }
     }
 }
