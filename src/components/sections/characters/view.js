@@ -4,7 +4,7 @@ import styles from './styles'
 import { connect } from 'react-redux'
 import * as CharactersActions from '../../../redux/characters/actions'
 import { CharacterCell } from '../../widgets/'
-
+import { Actions } from 'react-native-router-flux'
 class Characters extends Component {
 
     componentDidMount(){
@@ -37,16 +37,18 @@ const mapStateToProps  = (state) => {
     }
 }
 
-const mapDispatchTopProps = (dispatch, props) => {
+const mapDispatchToProps = (dispatch, props) => {
    
     return {
         fetchHouseCharacters: () => {
             dispatch(CharactersActions.fetchHouseCharacters())
         },
         onCharacterTapped: (character) => {
+            console.log(character)
             dispatch(CharactersActions.setItem(character))
+             Actions.characterDetail({title: character.nombre})
         }
     }
 }
 
-export default connect(mapStateToProps,mapDispatchTopProps)(Characters)
+export default connect(mapStateToProps,mapDispatchToProps)(Characters)

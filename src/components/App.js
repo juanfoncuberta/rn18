@@ -1,5 +1,5 @@
 import React, {Component} from 'react' 
-import { StatusBar} from 'react-native'
+import { StatusBar, TouchableOpacity, Text } from 'react-native'
 import { Router, Scene, Stack, Actions } from 'react-native-router-flux'
 import { Houses, Characters, CharacterDetail } from './sections/'
 import * as api from '../api/'
@@ -20,7 +20,11 @@ const sceneDefaultStyles = {
     backButtonTextStyle: { color: 'white'},
     titleStyle: { color: 'white'}
 }
-
+const RighButton = props => (
+    <TouchableOpacity style={{padding: 10}} onPress={() => {}}>
+        <Text style={{color: 'white', fontWeight: 'bold'}}>{'Añadir'}</Text>
+    </TouchableOpacity>
+)
 export default class App extends Component {
 
     componentWillMount(){
@@ -37,10 +41,11 @@ export default class App extends Component {
                                 initial={true} 
                                 hideNavBar={true}/>
                         <Scene key="characters" 
-                                component={Characters} 
+                                component={Characters}
+                                renderRightButton={RighButton} 
                                 {...sceneDefaultStyles}
                          />
-                        <Scene key='characterDetail'
+                        <Scene key={'characterDetail'}
                                component={CharacterDetail}
                                {...sceneDefaultStyles}
                         />

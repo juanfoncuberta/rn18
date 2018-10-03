@@ -30,8 +30,10 @@ export function fetchHouseCharacters(){
     return  ( dispatch, getState, api) => {
         const house = getState().houses.item
         if(!house) return
-
+        
+        dispatch(setList([]))
         dispatch(setFetching(true))
+        
         api
             .fetchHouseCharacters(house.id)
             .then( 
