@@ -1,7 +1,7 @@
 import React, {Component} from 'react' 
 import { StatusBar, TouchableOpacity, Text } from 'react-native'
 import { Router, Scene, Stack, Actions } from 'react-native-router-flux'
-import { Houses, Characters, CharacterDetail } from './sections/'
+import { Houses, Characters, CharacterDetail, CharacterAdd } from './sections/'
 import * as api from '../api/'
 import { createStore, applyMiddleware, combineReducers} from 'redux'
 import { Provider, connect } from 'react-redux'
@@ -21,8 +21,8 @@ const sceneDefaultStyles = {
     titleStyle: { color: 'white'}
 }
 const RighButton = props => (
-    <TouchableOpacity style={{padding: 10}} onPress={() => {}}>
-        <Text style={{color: 'white', fontWeight: 'bold'}}>{'Añadir'}</Text>
+    <TouchableOpacity style={{padding: 10}} onPress={() => Actions.characterAdd() }>
+        <Text style={{color: 'white', fontWeight: 'bold'}}>{'Add'}</Text>
     </TouchableOpacity>
 )
 export default class App extends Component {
@@ -37,9 +37,10 @@ export default class App extends Component {
                 <Router>
                     <Stack key="root">
                         <Scene key="houses" 
-                                component={Houses} 
-                                initial={true} 
-                                hideNavBar={true}/>
+                                component={Houses}
+                                initial={true}
+                                hideNavBar={true}
+                        />
                         <Scene key="characters" 
                                 component={Characters}
                                 renderRightButton={RighButton} 
@@ -48,6 +49,11 @@ export default class App extends Component {
                         <Scene key={'characterDetail'}
                                component={CharacterDetail}
                                {...sceneDefaultStyles}
+                        />
+                        <Scene key={'characterAdd'}
+                                component={CharacterAdd}
+                                title={'Add'}
+                                {...sceneDefaultStyles}
                         />
                     </Stack>
                 </Router>
